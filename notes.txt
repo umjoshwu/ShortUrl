@@ -1,0 +1,8 @@
+nodemon server.js: start up server file, using auto refresh nodemon
+
+START:
+brew services start mongodb-community@7.0
+npm run devStart
+
+STOP:
+brew services stop mongodb-community@7.0
