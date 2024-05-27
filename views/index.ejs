@@ -29,18 +29,74 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- do this for each of the short url inputs -->
-                <% shortUrl.forEach(shortUrl=> { %>
+                <% try { %>
+                    <!-- Render data items -->
+                    <% shortUrl.forEach(shortUrl => { %>
+                        <tr>
+                            <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
+                            <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
+                            <td><%= shortUrl.clicks %></td>
+                        </tr>
+                    <% }) %>
+                <% } catch (error) { %>
+                    <!-- Handle the error -->
+                    console.log("An error occurred:");
                     <tr>
-                        <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
-                        <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
-                        <td><%= shortUrl.clicks %></td>
+                        <td colspan="3">An error occurred while rendering the view </td>
                     </tr>
-                    <%})%>
-
+                <% } %>
             </tbody>
         </table>
     </div>
+    <!-- <script>
+        document.querySelector('.form-inline').addEventListener('submit', async function(e) {
+            
+            const fullUrl = document.getElementById('full').value;
+            const response = await fetch('/shortUrl', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ full: fullUrl }),
+            });
+            const data = await response.json();
+            if (data.error) {
+                e.preventDefault();
+                console.error('Error: ' + data.error);
+            }
+        });
+    </script> -->
+    <!-- <script>
+        //let clickCount = 0;
+        document.querySelector('.form-inline').addEventListener('submit', async function(e) {
+
+            //const fullUrl = document.getElementById('full').value;
+            e.preventDefault();
+
+            const fullUrl = document.getElementById('full').value;
+
+            console.log('Button clicked ' + ' times');
+    
+        });
+    </script> -->
+    <!-- <script>
+        fetch('/shortUrl', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ full: url }),
+            })
+            .then(response => response.json())
+            .then(data => console.log(data));
+            //    { if (data.error) {
+            //         document.getElementById('error-message').textContent = data.error;
+            //     } else {
+            //         location.reload();
+            //     }
+            // })
+    </script> -->
 </body>
 
 </html>
+
